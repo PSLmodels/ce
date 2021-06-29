@@ -1,2 +1,2 @@
-# ce
-Package for working with the US Consumer Expenditure Survey
+# `cesurvey`
+Python package for working with the US Consumer Expenditure Survey
