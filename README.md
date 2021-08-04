@@ -1,10 +1,16 @@
 # `cesurvey`
 Python package for working with the US Consumer Expenditure Survey
 
+# Installation
+
+```shell
+pip install git+https://github.com/PSLmodels/cesurvey
+```
+
 
 # Example usage
 
-```
+```python
 import cesurvey
 
 fmli_2019 = cesurvey.get_interview_data(2019)
