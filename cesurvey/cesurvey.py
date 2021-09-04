@@ -110,13 +110,38 @@ def get_interview_data(year, revised_q1=True):
     return fmli_df
 
 
-def estimate_annual_quantity(var_name, fmli_df, replicate_quarters=4):
+def estimate_annual_quantity(var_name, fmli_df, var_type="expense"):
     if len(set(fmli_df['nominal_year'])) > 1:
         raise NotImplementedError("Multi-survey year estimation not yet supported")
+    if var_type not in ["expense", "demographics"]:
+        raise ValueError("var_type must be of type 'expense' or 'demographics'")
 
-    months_per_quarter = 3
-    proportion_in_scope = fmli_df['months_in_scope'] / months_per_quarter
-    w = fmli_df['weight'] / replicate_quarters * proportion_in_scope
-    denom = np.sum(w)
-    numer = np.sum(w * fmli_df[var_name])
-    return numer / denom
+    MONTHS_PER_QUARTER = 3
+    var_name = 'FINCBTXM'
+    var_name = 'ALCBEVPQ'
+    var_name = 'ALCBEVCQ'
+    nominal_quarter_ests = []
+    for nominal_quarter in [1, 2, 3, 4, 5]:
+        fmli_j = fmli_df.loc[fmli_df['nominal_quarter'] == nominal_quarter]
+        proportion_in_scope = fmli_j['months_in_scope'] / MONTHS_PER_QUARTER
+        if var_type == "demographics":
+            w = fmli_j['weight'] * proportion_in_scope  # NOTE: redefine weight?
+            numerator = np.sum(w * fmli_j[var_name])
+            denominator = np.sum(w)
+        elif var_type == "expense":
+            logging.info("expense")
+            w = fmli_j['weight'] 
+            numerator = np.sum(w * fmli_j[var_name])
+            # Note that proportion_in_scope < 1 will scale up number
+            # some proportion_in_scope vals are 0 so 1/x is problematic
+            denominator = np.sum(w * proportion_in_scope)
+        est = numerator / denominator
+        nominal_quarter_ests.append(est)
+
+        if var_type == "demographics":
+            result = np.mean(nominal_quarter_ests)     
+        elif var_type == "expense":
+            # Summed 5 numbers, but there are 4 quarters
+            result = np.sum(nominal_quarter_ests) * (4 / 5)
+    return result
+
