@@ -83,6 +83,34 @@ hsld_furnish_equip = cesurvey.estimate_annual_quantity("HOUSEQPQ", fmli_2019,
                                                        "expense")
 compare(hsld_furnish_equip, 2098)
 
+apparel_and_services = cesurvey.estimate_annual_quantity("APPARPQ", fmli_2019,
+                                                         "expense")
+compare(apparel_and_services, 1883)
 
+transportation = cesurvey.estimate_annual_quantity("TRANSPQ", fmli_2019,
+                                                         "expense")
+compare(transportation, 10743)
+
+used_car = cesurvey.estimate_annual_quantity("CARTKUPQ", fmli_2019,
+                                             "expense")
+new_car = cesurvey.estimate_annual_quantity("CARTKNPQ", fmli_2019,
+                                            "expense")
+compare(used_car + new_car, 4394)
+
+gas_motor_oil = cesurvey.estimate_annual_quantity("GASMOPQ", fmli_2019,
+                                                   "expense")
+compare(gas_motor_oil, 2094)
+
+vehicles_rent_lease = cesurvey.estimate_annual_quantity("VRNTLOPQ", fmli_2019,
+                                                        "expense")
+vehicle_insurance = cesurvey.estimate_annual_quantity("VEHINSPQ", fmli_2019,
+                                                        "expense")
+vehicle_maintenance = cesurvey.estimate_annual_quantity("MAINRPPQ", fmli_2019,
+                                                        "expense")
+compare(vehicles_rent_lease + vehicle_insurance + vehicle_maintenance, 3474)
+
+public_other_trans = cesurvey.estimate_annual_quantity("PUBTRAPQ", fmli_2019,
+                                                       "expense")
+compare(public_other_trans, 781)
 
 ```

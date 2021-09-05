@@ -138,7 +138,7 @@ def estimate_annual_quantity(var_name, fmli_df, var_type="expense"):
         if var_type == "demographics":
             result = np.mean(nominal_quarter_ests)     
         elif var_type == "expense":
-            # Summed 5 numbers, but there are 4 quarters
-            result = np.sum(nominal_quarter_ests) * (4 / 5)
+            # The mean quarterly estimate must be annualized 
+            result = np.mean(nominal_quarter_ests) * 4 
     return result
 
