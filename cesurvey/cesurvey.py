@@ -117,9 +117,6 @@ def estimate_annual_quantity(var_name, fmli_df, var_type="expense"):
         raise ValueError("var_type must be of type 'expense' or 'demographics'")
 
     MONTHS_PER_QUARTER = 3
-    var_name = 'FINCBTXM'
-    var_name = 'ALCBEVPQ'
-    var_name = 'ALCBEVCQ'
     nominal_quarter_ests = []
     for nominal_quarter in [1, 2, 3, 4, 5]:
         fmli_j = fmli_df.loc[fmli_df['nominal_quarter'] == nominal_quarter]
