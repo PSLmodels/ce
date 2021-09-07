@@ -113,4 +113,47 @@ public_other_trans = cesurvey.estimate_annual_quantity("PUBTRAPQ", fmli_2019,
                                                        "expense")
 compare(public_other_trans, 781)
 
+health_care = cesurvey.estimate_annual_quantity("HEALTHPQ", fmli_2019,
+                                                "expense")
+compare(health_care, 5193)
+
+entertainment = cesurvey.estimate_annual_quantity("ENTERTPQ", fmli_2019,
+                                                  "expense")
+compare(entertainment, 3090)
+
+personal_care = cesurvey.estimate_annual_quantity("PERSCAPQ", fmli_2019,
+                                                  "expense")
+compare(personal_care, 786)
+
+reading = cesurvey.estimate_annual_quantity("READPQ", fmli_2019,
+                                            "expense")
+compare(reading, 92)
+
+education = cesurvey.estimate_annual_quantity("EDUCAPQ", fmli_2019,
+                                              "expense")
+compare(education, 1443)
+
+tobacco = cesurvey.estimate_annual_quantity("TOBACCPQ", fmli_2019,
+                                              "expense")
+compare(tobacco, 320)
+
+misc = cesurvey.estimate_annual_quantity("MISCPQ", fmli_2019,
+                                         "expense")
+compare(misc, 899) 
+
+cash_contrib = cesurvey.estimate_annual_quantity("CASHCOPQ", fmli_2019,
+                                                 "expense")
+compare(cash_contrib, 1995) 
+
+retire_pension_ss = cesurvey.estimate_annual_quantity("RETPENPQ", fmli_2019,
+                                                      "expense")
+compare(retire_pension_ss, 7165) 
+
+just_pensions = cesurvey.estimate_annual_quantity("FPRIPENX", fmli_2019,
+                                                  "expense")
+compare(retire_pension_ss, 7165) 
+
+
+
+
 ```
