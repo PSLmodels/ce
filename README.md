@@ -7,21 +7,26 @@ Python package for working with the US Consumer Expenditure Survey
 pip install git+https://github.com/PSLmodels/cesurvey
 ```
 
-
 # Example usage
 
 ```python
 import numpy as np
+
+import cesurvey
+
 def compare(est, benchmark):
+    """Convenience function to compare published CE estimates and estimated"""
     print(f"The estimate is {np.round(est, 2)}")
     print(f"The published value is is {benchmark}")
     print(f"The rel error is {np.round(100 * (est - benchmark) / benchmark, 2)}%")
 
-import cesurvey
 
 fmli_2019 = cesurvey.get_interview_data(2019)
 
 lku = cesurvey.get_data_dictionary()  # A tuple of variable and code lookups
+
+# Replicating BLS Report from 2019 CE ------------------------------
+# https://www.bls.gov/opub/reports/consumer-expenditures/2019/home.htm
 
 income_bf_tax_2019 = cesurvey.estimate_annual_quantity("FINCBTXM", fmli_2019,
                                                        "demographics")
@@ -30,16 +35,18 @@ compare(income_bf_tax_2019, 82852)
 tot_expenditures = cesurvey.estimate_annual_quantity("TOTEXPPQ", fmli_2019,
                                                      "expense")
 compare(tot_expenditures, 63036)
+
 food_expenditures = cesurvey.estimate_annual_quantity("FOODPQ", fmli_2019,
                                                       "expense")
 compare(food_expenditures, 8169)
 
+# Note how the differences in food_at_home and food_away offset each other
 food_at_home = cesurvey.estimate_annual_quantity("FDHOMEPQ", fmli_2019,
                                                  "expense")
 compare(food_at_home, 4643)
 
 food_away = cesurvey.estimate_annual_quantity("FDAWAYPQ", fmli_2019,
-                                                 "expense")
+                                              "expense")
 compare(food_away, 3526)
 
 alcohol = cesurvey.estimate_annual_quantity("ALCBEVPQ", fmli_2019,
@@ -74,6 +81,7 @@ compare(utilies_fuels_public_services, 4055)
 hsld_ops = cesurvey.estimate_annual_quantity("HOUSOPPQ", fmli_2019,
                                              "expense")
 compare(hsld_ops, 1570)
+
 # Household supply candidates: MISCEQCQ, OTHHEXCQ
 hsld_supplies = cesurvey.estimate_annual_quantity("OTHHEXPQ", fmli_2019,
                                                   "expense")
@@ -88,7 +96,7 @@ apparel_and_services = cesurvey.estimate_annual_quantity("APPARPQ", fmli_2019,
 compare(apparel_and_services, 1883)
 
 transportation = cesurvey.estimate_annual_quantity("TRANSPQ", fmli_2019,
-                                                         "expense")
+                                                   "expense")
 compare(transportation, 10743)
 
 used_car = cesurvey.estimate_annual_quantity("CARTKUPQ", fmli_2019,
@@ -98,7 +106,7 @@ new_car = cesurvey.estimate_annual_quantity("CARTKNPQ", fmli_2019,
 compare(used_car + new_car, 4394)
 
 gas_motor_oil = cesurvey.estimate_annual_quantity("GASMOPQ", fmli_2019,
-                                                   "expense")
+                                                  "expense")
 compare(gas_motor_oil, 2094)
 
 vehicles_rent_lease = cesurvey.estimate_annual_quantity("VRNTLOPQ", fmli_2019,
@@ -134,7 +142,7 @@ education = cesurvey.estimate_annual_quantity("EDUCAPQ", fmli_2019,
 compare(education, 1443)
 
 tobacco = cesurvey.estimate_annual_quantity("TOBACCPQ", fmli_2019,
-                                              "expense")
+                                            "expense")
 compare(tobacco, 320)
 
 misc = cesurvey.estimate_annual_quantity("MISCPQ", fmli_2019,
@@ -148,12 +156,4 @@ compare(cash_contrib, 1995)
 retire_pension_ss = cesurvey.estimate_annual_quantity("RETPENPQ", fmli_2019,
                                                       "expense")
 compare(retire_pension_ss, 7165) 
-
-just_pensions = cesurvey.estimate_annual_quantity("FPRIPENX", fmli_2019,
-                                                  "expense")
-compare(retire_pension_ss, 7165) 
-
-
-
-
 ```
