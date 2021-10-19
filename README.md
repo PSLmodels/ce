@@ -157,3 +157,48 @@ retire_pension_ss = cesurvey.estimate_annual_quantity("RETPENPQ", fmli_2019,
                                                       "expense")
 compare(retire_pension_ss, 7165) 
 ```
+
+## Fremstad and Paul categories
+
+```
+from cesurvey import estimate_annual_quantity
+
+# Trip expenditures on airfare last quarter
+airfare = estimate_annual_quantity("TAIRFARP", fmli_2019)
+alcohol = estimate_annual_quantity("ALCBEVPQ", fmli_2019)
+education = estimate_annual_quantity("EDUCAPQ", fmli_2019)
+auto_insurance = estimate_annual_quantity("VEHINSPQ", fmli_2019)
+autos = (
+  estimate_annual_quantity("CARTKUPQ", fmli_2019) # used car
+  + estimate_annual_quantity("CARTKNPQ", fmli_2019) # new car
+  + estimate_annual_quantity("VRNTLOPQ", fmli_2019) # rent/lease
+)
+books = estimate_annual_quantity("READPQ", fmli_2019)
+# https://www.bls.gov/opub/btn/volume-8/the-relationship-between-cash-contributions-pretax-income-and-age.htm
+charity = estimate_annual_quantity("CASHCOPQ", fmli_2019) * 396.59 / 2391.48
+clothes = estimate_annual_quantity("APPARPQ", fmli_2019)
+electricity = estimate_annual_quantity("ELCTRCPQ", fmli_2019)
+food_at_home = estimate_annual_quantity("FDHOMEPQ", fmli_2019)
+food_at_restaurants = estimate_annual_quantity("FDAWAYPQ", fmli_2019)
+furnishings = cesurvey.estimate_annual_quantity("FURNTRPQ", fmli_2019)
+# Includes motor oil
+gasoline = estimate_annual_quantity("GASMOPQ", fmli_2019)
+health = estimate_annual_quantity("HEALTHPQ", fmli_2019)
+# Going with "fuel oil" although there's another category that includes "other fuels"
+home_heating_fuel = estimate_annual_quantity("FULOILPQ", fmli_2019)
+household_supplies = estimate_annual_quantity("OTHHEXPQ", fmli_2019)
+# including personal insurance in this cateogry
+life_insurance = estimate_annual_quantity("LIFINSPQ", fmli_2019)
+mass_transit = estimate_annual_quantity("PUBTRAPQ", fmli_2019)
+natural_gas = estimate_annual_quantity("NTLGASPQ", fmli_2019)
+# I'm just going to call "other car services" maintenance
+other_car_services = estimate_annual_quantity("MAINRPPQ", fmli_2019)
+# The word "other" is ignored
+other_dwelling_rentals = estimate_annual_quantity("RENDWEPQ", fmli_2019)
+recreation_and_sports = estimate_annual_quantity("TFEESADP", fmli_2019)
+telephone = estimate_annual_quantity("TELEPHPQ", fmli_2019)
+# tenant occupied dwellings is owned dwellings?
+owned_dwellings = estimate_annual_quantity("OWNDWEPQ", fmli_2019)
+tobacco = estimate_annual_quantity("TOBACCPQ", fmli_2019)
+water = estimate_annual_quantity("WATRPSPQ", fmli_2019)
+```
