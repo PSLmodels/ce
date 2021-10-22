@@ -195,10 +195,53 @@ natural_gas = estimate_annual_quantity("NTLGASPQ", fmli_2019)
 other_car_services = estimate_annual_quantity("MAINRPPQ", fmli_2019)
 # The word "other" is ignored
 other_dwelling_rentals = estimate_annual_quantity("RENDWEPQ", fmli_2019)
-recreation_and_sports = estimate_annual_quantity("TFEESADP", fmli_2019)
+# judgement call here. Total outlays including... sport equip
+recreation_and_sports = (
+    estimate_annual_quantity("EENTRMTP", fmli_2019)
+)
+# OTHEQPPQ is part of total entertainment
+other_recreation = estimate_annual_quantity("OTHEQPPQ", fmli_2019)
 telephone = estimate_annual_quantity("TELEPHPQ", fmli_2019)
 # tenant occupied dwellings is owned dwellings?
-owned_dwellings = estimate_annual_quantity("OWNDWEPQ", fmli_2019)
+tentant_occupied_dwellings = estimate_annual_quantity("OWNDWEPQ", fmli_2019)
 tobacco = estimate_annual_quantity("TOBACCPQ", fmli_2019)
 water = estimate_annual_quantity("WATRPSPQ", fmli_2019)
+
+# Fremstad and Paul (2019) Extraction method
+2019: 6.6 billion metric tons, or 5.8 separated from land sector
+
+hh_co2_kg = (
+    1.0 * airfare
+    + .33 * alcohol
+    + .24 * education
+    + .05 * auto_insurance
+    + .73 * autos
+    + .22 * books
+    + .19 * charity
+    + .22 * clothes
+    + 2.24 * electricity
+    + .39 * food_at_home
+    + .24 * food_at_restaurants
+    + .71 * furnishings
+    + 3.22 * gasoline
+    + .22 * health
+    + 2.75 * home_heating_fuel
+    + .36 * household_supplies
+    + .05 * life_insurance
+    + .94 * mass_transit
+    + 1.82 * natural_gas
+    + .23 * other_car_services
+    + .06 * other_dwelling_rentals
+    + .25 * other_recreation #TODO
+    + .7 * recreation_and_sports
+    + .18 * telephone
+    + .05 * tentant_occupied_dwellings
+    + .36 * tobacco
+    + .38 * water
+)
+
+co2_bil_tons = (hh_co2_kg / 1000) * 128.58 * 1E6 / 1E9
+co2_bil_tons
+
+
 ```
